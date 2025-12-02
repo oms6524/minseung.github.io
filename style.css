@@ -17,11 +17,11 @@ body {
     color: var(--text-main);
     overflow-x: hidden;
     min-height: 100vh;
+    /* 드래그 방지 (클릭 연타 시 불편함 방지) */
+    user-select: none; 
 }
 
-#canvas1 {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-}
+#canvas1 { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
 h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; margin: 0; }
 h1 { font-size: 3.5rem; background: linear-gradient(to right, #fff, var(--accent-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -32,35 +32,23 @@ h1 { font-size: 3.5rem; background: linear-gradient(to right, #fff, var(--accent
     text-shadow: 0 0 10px rgba(118, 255, 3, 0.3);
 }
 
-/* 링크 하이라이트 효과 */
-.highlight { 
-    color: var(--accent-green); 
-    font-weight: 700; text-decoration: none; 
-    position: relative; transition: all 0.3s ease;
-}
-a.highlight.link-hover:hover {
-    text-shadow: 0 0 15px var(--accent-green);
-    cursor: pointer; border-bottom: 2px solid var(--accent-green);
-}
+.highlight { color: var(--accent-green); font-weight: 700; text-decoration: none; position: relative; transition: all 0.3s ease; }
+a.highlight.link-hover:hover { text-shadow: 0 0 15px var(--accent-green); cursor: pointer; border-bottom: 2px solid var(--accent-green); }
 
 .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-
 header { text-align: center; margin-bottom: 60px; }
 .role-info { font-size: 1.2rem; color: var(--text-dim); margin-top: 10px; font-weight: 300; }
 .bio-text { max-width: 600px; margin: 30px auto; line-height: 1.8; color: #efebe9; font-size: 1.1rem; }
 
 .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
-
-/* 버튼 기본 스타일 */
 .soil-btn {
     text-decoration: none; color: var(--accent-green); padding: 10px 24px;
     border: 1px solid var(--accent-green); border-radius: 50px;
     font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(0,0,0,0.3); backdrop-filter: blur(5px); cursor: pointer;
+    background: rgba(0,0,0,0.3); backdrop-filter: blur(5px); cursor: pointer; white-space: nowrap; 
 }
 .soil-btn:hover { background: var(--accent-green); color: #000; box-shadow: 0 0 20px var(--accent-green); }
 
-/* 이메일 팝업(Tooltip) */
 .tooltip-container { position: relative; display: inline-block; }
 .tooltip-text {
     visibility: hidden; width: 240px; background-color: rgba(0, 0, 0, 0.9);
@@ -69,74 +57,78 @@ header { text-align: center; margin-bottom: 60px; }
     opacity: 0; transition: opacity 0.3s; font-size: 0.9rem;
     border: 1px solid var(--accent-green); box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
-.tooltip-text::after {
-    content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px;
-    border-width: 5px; border-style: solid;
-    border-color: var(--accent-green) transparent transparent transparent;
-}
+.tooltip-text::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: var(--accent-green) transparent transparent transparent; }
 .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; }
 
-/* 카드/리스트 스타일 */
 .glass-list li, .gallery-card {
     background: var(--glass-bg); border: 1px solid var(--glass-border);
     backdrop-filter: blur(10px); border-radius: 16px; padding: 25px;
     margin-bottom: 20px; transition: transform 0.1s; transform-style: preserve-3d;
 }
-
 .glass-list { list-style: none; padding: 0; }
 .edu-date { color: var(--accent-teal); font-weight: 600; display: block; margin-bottom: 5px; }
 .edu-title { font-size: 1.3rem; font-weight: 700; color: #fff; }
-
 .pub-title { font-size: 1.2rem; font-weight: 600; color: #fff; display: block; margin: 5px 0; }
 .pub-journal { color: var(--text-dim); font-style: italic; }
 
-/* 갤러리 그리드 (반응형 설정) */
-.gallery-grid { 
-    display: grid; 
-    /* 카드의 최소 너비를 280px로 설정하여, 화면에 맞춰 자동으로 열 개수 조절 */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-    gap: 30px; 
-}
-.gallery-img-wrapper { 
-    height: 200px; overflow: hidden; border-radius: 12px; margin-bottom: 15px; 
-    border: 1px solid rgba(255,255,255,0.1); cursor: pointer; /* 클릭 가능 표시 */
-}
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.gallery-img-wrapper { height: 200px; overflow: hidden; border-radius: 12px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
 .gallery-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 .gallery-card:hover img { transform: scale(1.1); }
 .gallery-content h3 { color: var(--accent-green); margin-bottom: 10px; }
 
-/* 👇 [NEW] 이미지 확대 모달 스타일 */
 .modal {
-    display: none; /* 기본적으로 숨김 */
-    position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.85); /* 진한 반투명 검정 배경 */
-    backdrop-filter: blur(5px); /* 배경 흐림 효과 */
-    align-items: center; justify-content: center; flex-direction: column;
-    opacity: 0; transition: opacity 0.3s ease;
+    display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
+    align-items: center; justify-content: center; flex-direction: column; opacity: 0; transition: opacity 0.3s ease;
 }
 .modal.active { display: flex; opacity: 1; }
-.modal-content {
-    max-width: 90%; max-height: 80vh; /* 화면 넘어가지 않게 제한 */
-    border-radius: 12px; box-shadow: 0 0 30px rgba(118, 255, 3, 0.2);
-    transform: scale(0.9); transition: transform 0.3s ease;
-}
+.modal-content { max-width: 90%; max-height: 80vh; border-radius: 12px; box-shadow: 0 0 30px rgba(118, 255, 3, 0.2); transform: scale(0.9); transition: transform 0.3s ease; }
 .modal.active .modal-content { transform: scale(1); }
 #modal-caption { color: var(--text-dim); margin-top: 20px; font-size: 1.1rem; text-align: center; }
-.close-btn {
-    position: absolute; top: 30px; right: 40px; color: #fff; font-size: 40px; font-weight: bold;
-    cursor: pointer; transition: 0.3s; z-index: 1001;
-}
+.close-btn { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.3s; z-index: 1001; }
 .close-btn:hover { color: var(--accent-green); }
 
 footer { text-align: center; color: var(--text-dim); margin-top: 80px; font-size: 0.9rem; opacity: 0.6; }
 
-.reveal { opacity: 0; transform: translateY(30px); transition: 1s ease; }
+.reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
 .reveal.active { opacity: 1; transform: translateY(0); }
 .typing-cursor::after { content: '▏'; animation: blink 1s infinite; color: var(--accent-green); }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* 👇 [NEW] 이스터에그 스타일 (Cinzel 폰트 적용) */
+.easter-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: #000; /* 완전한 암전 */
+    z-index: 9999; /* 모든 것 위에 */
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; /* 평소엔 클릭 통과 */
+    transition: opacity 2s ease-in-out;
+}
+.easter-overlay.active { opacity: 1; pointer-events: auto; }
+
+.easter-content { text-align: center; color: #fff; font-family: 'Cinzel', serif; padding: 20px; }
+
+.easter-line-1 {
+    font-size: 1.5rem; line-height: 1.8; color: #aaa;
+    opacity: 0; transform: translateY(20px);
+    transition: all 2s ease 0.5s; /* 0.5초 뒤 등장 */
+}
+.easter-overlay.active .easter-line-1 { opacity: 1; transform: translateY(0); }
+
+.easter-line-2 {
+    font-size: 4rem; margin-top: 40px; color: var(--accent-green);
+    text-shadow: 0 0 20px var(--accent-green);
+    opacity: 0; transform: scale(0.9);
+    transition: all 2s cubic-bezier(0,1,0.5,1) 2.5s; /* 2.5초 뒤 극적으로 등장 */
+}
+.easter-overlay.active .easter-line-2 { opacity: 1; transform: scale(1); }
+
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
-    .soil-btn { padding: 8px 16px; font-size: 0.9rem; }
+    .soil-btn { padding: 8px 12px; font-size: 0.85rem; }
+    .social-links { flex-wrap: wrap; gap: 10px; }
     .close-btn { top: 20px; right: 20px; font-size: 30px; }
+    .easter-line-1 { font-size: 1rem; }
+    .easter-line-2 { font-size: 2.5rem; }
 }

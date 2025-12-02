@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- [1] 데이터 로딩 ---
+    // [1] 데이터 로딩
     document.getElementById('name').innerText = config.profile.name;
     document.getElementById('uni').innerText = config.profile.university;
     document.getElementById('scholar-link').href = config.profile.scholar;
@@ -9,11 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').innerText = new Date().getFullYear();
 
     const labLink = document.getElementById('lab-link');
-    if(config.profile.labUrl) {
-        labLink.href = config.profile.labUrl;
-    }
+    if(config.profile.labUrl) labLink.href = config.profile.labUrl;
 
-    // 이메일 팝업 및 복사
+    // 이메일 기능
     const emailTooltip = document.getElementById('email-tooltip-text');
     const emailBtn = document.getElementById('email-btn');
     const myEmail = config.profile.email;
@@ -43,6 +41,43 @@ document.addEventListener('DOMContentLoaded', () => {
         eduList.appendChild(li);
     });
 
+    // Awards
+    const awardList = document.getElementById('award-list');
+    if(config.awards && awardList) {
+        config.awards.forEach(award => {
+            const li = document.createElement('li');
+            li.className = 'tilt-card';
+            li.innerHTML = `
+                <span class="edu-date">${award.date}</span>
+                <div class="edu-title" style="font-size:1.1rem;">${award.title}</div>
+                <div style="color: var(--text-dim); font-size:0.95rem;">${award.org}</div>
+            `;
+            awardList.appendChild(li);
+        });
+    }
+
+    // Patents
+    const patentList = document.getElementById('patent-list');
+    if(config.patents && patentList) {
+        config.patents.forEach(pat => {
+            const li = document.createElement('li');
+            li.className = 'tilt-card';
+            
+            let noteHtml = '';
+            if(pat.note) {
+                noteHtml = `<div style="margin-top:8px; color:#76ff03; font-weight:600; font-size:0.9rem;">✨ ${pat.note}</div>`;
+            }
+
+            li.innerHTML = `
+                <div class="pub-title" style="margin-bottom:5px;">${pat.title}</div>
+                <div style="color: var(--text-dim); font-size:0.9rem; margin-bottom:4px;">${pat.number}</div>
+                <div style="color: #ccc; font-size:0.9rem; line-height:1.5;">${pat.inventors}</div>
+                ${noteHtml}
+            `;
+            patentList.appendChild(li);
+        });
+    }
+
     // Publications
     const pubList = document.getElementById('pub-list');
     config.publications.forEach(pub => {
@@ -65,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pubList.appendChild(li);
     });
 
-    // ⭐ [NEW] Gallery 렌더링 및 모달 연결 ⭐
+    // Gallery & Modal
     const gallery = document.getElementById('gallery-grid');
     const modal = document.getElementById('image-modal');
     const modalImg = document.getElementById('modal-img');
@@ -87,35 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
         gallery.appendChild(div);
     });
 
-    // 모달 열기 함수 (전역 범위로 설정하여 HTML에서 호출 가능하게 함)
     window.openModal = function(imgElement) {
-        modal.classList.add('active'); // 모달 표시
-        modalImg.src = imgElement.src; // 클릭한 이미지 주소 넣기
-        modalCaption.innerText = imgElement.alt; // 캡션(제목) 넣기
-        document.body.style.overflow = 'hidden'; // 배경 스크롤 막기
+        modal.classList.add('active');
+        modalImg.src = imgElement.src;
+        modalCaption.innerText = imgElement.alt;
+        document.body.style.overflow = 'hidden';
     }
 
-    // 모달 닫기 함수
     function closeModal() {
         modal.classList.remove('active');
-        setTimeout(() => {
-            modalImg.src = ''; // 이미지 초기화
-        }, 300); // 트랜지션 시간 이후 초기화
-        document.body.style.overflow = 'auto'; // 스크롤 다시 허용
+        setTimeout(() => { modalImg.src = ''; }, 300);
+        document.body.style.overflow = 'auto';
     }
-
-    // 닫기 버튼 클릭 시 닫기
     closeBtn.addEventListener('click', closeModal);
-
-    // 모달 배경 클릭 시 닫기
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) { // 이미지 영역 밖을 클릭했을 때만
-            closeModal();
-        }
-    });
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
 
-    // --- [2] 텍스트 타이핑 효과 ---
+    // [2] 타이핑 효과
     const bioText = config.profile.bio;
     const bioElement = document.getElementById('typewriter-bio');
     let i = 0;
@@ -133,19 +156,25 @@ document.addEventListener('DOMContentLoaded', () => {
         typeWriter();
     }, 500);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) entry.target.classList.add('active');
-        });
-    });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // --- [3] 애니메이션: Clean & Subtle "Soil Breathing" ---
+    // [3] Scroll Reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+
+    // [4] Soil Breathing Animation
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
     let particlesArray;
     let mouse = { x: null, y: null, radius: 100 }
 
@@ -223,9 +252,8 @@ document.addEventListener('DOMContentLoaded', () => {
         init();
     });
 
-    // 3D Tilt Card
-    const cards = document.querySelectorAll('.tilt-card');
-    cards.forEach(card => {
+    const cardElements = document.querySelectorAll('.tilt-card');
+    cardElements.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -240,4 +268,42 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
         });
     });
+
+
+    // 👇 [5] ⭐ EASTER EGG (5번 클릭 트리거) ⭐
+    let clickCount = 0;
+    let clickTimer;
+    const easterOverlay = document.getElementById('easter-egg-overlay');
+
+    // 화면 아무곳이나 클릭할 때 감지
+    document.addEventListener('click', (e) => {
+        // 버튼이나 링크, 이미지를 클릭했을 때는 카운트하지 않음 (오작동 방지)
+        if (e.target.closest('a') || e.target.closest('button') || e.target.closest('img')) {
+            return;
+        }
+
+        // 연속 클릭 카운트
+        clickCount++;
+        
+        // 1초 동안 클릭이 없으면 카운트 리셋
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => {
+            clickCount = 0;
+        }, 1000);
+
+        // 5번 클릭 달성 시
+        if (clickCount === 5) {
+            triggerEasterEgg();
+            clickCount = 0; // 리셋
+        }
+    });
+
+    function triggerEasterEgg() {
+        easterOverlay.classList.add('active');
+        
+        // 이스터에그 화면 클릭하면 다시 닫기
+        easterOverlay.addEventListener('click', () => {
+            easterOverlay.classList.remove('active');
+        }, { once: true }); // 한 번만 실행하고 이벤트 삭제
+    }
 });

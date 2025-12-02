@@ -81,6 +81,61 @@ const config = {
         },
     ],
 
+// [수상 실적] (NEW)
+    awards: [
+        { date: "2022", title: "Agricultural Life Industry Startup Idea Contest (Top Award)", org: "GNU Agro Frontier Leader business group" },
+        { date: "2021", title: "National Non-face-to-face Business Model Idea Contest (Top Award)", org: "Korea Techno Park" },
+        { date: "2020", title: "Start-up Idea Contest (Top Award)", org: "GNU Public Education Innovation Center" },
+        { date: "2018 – 2022", title: "Regular Scholarship", org: "Gyeongsang National University (GNU)" },
+        { date: "2018 – 2020", title: "Agri and Food Talent Scholarship", org: "Ministry of Agriculture, Food and Rural Affairs" }
+    ],
+
+    // [특허] (NEW)
+    patents: [
+        {
+            title: "Molasses-Biomass Composite and Manufacturing method",
+            number: "KR 10-2465421-0000",
+            inventors: "J.-R. Jeon, <b>M. S. Oh</b>, Y. M. Kim, S. M. Kwon, H. Y. Yoon, S. M. Noh, S. J. Son",
+            note: "Technology transferred (Valued at KRW 20 million)"
+        },
+        {
+            title: "Composition for reducing methane emission from soil comprising hydroxyapatite coated with humic acid",
+            number: "KR 10-2792682-0000",
+            inventors: "J.-R. Jeon, H. Y. Yoon, E. N. Cho, P. J. Kim, S. M. Noh, <b>M. S. Oh</b>, S. J. Son, H. K. Chae",
+            note: ""
+        },
+        {
+            title: "Extraction method for fulvic acid analogue in lignocellulosic biomass",
+            number: "KR 10-2703227-0000",
+            inventors: "J.-R. Jeon, N. T. Phong, H. Y. Yoon, J. E. Park, J. M. Baek, Y. S. Lee, <b>M. S. Oh</b>, D. W. Han, G. S. Kim, M. S. Kang, M. N. Kwon, H. E. Choi",
+            note: ""
+        },
+        {
+            title: "Composition for eco-friendly packaging and manufacturing method thereof",
+            number: "KR 10-2703226-0000",
+            inventors: "J.-R. Jeon, <b>M. S. Oh</b>, E. N. Cho, Y. S. Lee, H. Y. Yoon, J. M. Baek, W. S. Noh, Y. M. Kim",
+            note: ""
+        },
+        {
+            title: "Composition for blocking ultraviolet comprising mixture of lignin and catechin",
+            number: "KR 10-2534550-0000",
+            inventors: "J.-R. Jeon, M. J. Kim, J. H. Kwon, J. Ur Rehman, T. H. Kim, <b>M. S. Oh</b>, H. Y. Yoon, H. J. Ahn",
+            note: ""
+        },
+        {
+            title: "Fungal pellets having improved adsorb activity for treating wastewater",
+            number: "KR 10-2249813-0000",
+            inventors: "J.-R. Jeon, H. Y. Yoon, E. M. Joe, <b>M. S. Oh</b>, Y. G. Lee, J. Ur Rehman, S. G. Shin",
+            note: ""
+        },
+        {
+            title: "Eco-friendly composite material and manufacturing method thereof",
+            number: "KR 10-20250107628",
+            inventors: "J.-R. Jeon, <b>M. S. Oh</b>, H. Y. Yoon, S. M. Noh, E. N. Cho, Y. S. Lee, Y. M. Kim",
+            note: ""
+        }
+    ],
+
     // [갤러리 / 연구 프로젝트]
     projects: [
         {
