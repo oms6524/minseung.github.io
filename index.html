@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhD Candidate Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1 id="name">Loading...</h1>
+        <p><span id="role"></span> @ <span id="uni"></span></p>
+        <p id="bio" style="max-width: 600px; margin: 20px auto; color: #555;"></p>
+        
+        <div class="social-links">
+            <a id="email-link" href="#">Email</a>
+            <a id="scholar-link" href="#" target="_blank">Google Scholar</a>
+            <a id="github-link" href="#" target="_blank">GitHub</a>
+        </div>
+    </header>
+
+    <section>
+        <h2>Education</h2>
+        <ul id="edu-list"></ul>
+    </section>
+
+    <section>
+        <h2>Publications</h2>
+        <ul id="pub-list"></ul>
+    </section>
+
+    <section>
+        <h2>Research Gallery</h2>
+        <div class="gallery-grid" id="gallery-grid"></div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 50px; font-size: 0.8em; color: #aaa;">
+        &copy; <span id="year"></span> My Academic Website.
+    </footer>
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+<script>
+    document.getElementById('year').innerText = new Date().getFullYear();
+</script>
+</body>
+</html>
