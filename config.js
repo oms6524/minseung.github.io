@@ -2,10 +2,10 @@
 const config = {
     // [개인 정보]
     profile: {
-        name: "홍길동 (Gil-Dong Hong)",
-        role: "Ph.D. Candidate in Your Major",
-        university: "OO 대학교 (OO University)",
-        email: "email@university.edu",
+        name: "오민승 (Min-Seung Oh)",
+        role: "Ph.D. Candidate in Soil science",
+        university: 서울대학교 (Seoul National University)",
+        email: "oms6524@snu.ac.kr",
         github: "https://github.com/yourid",
         scholar: "https://scholar.google.com/citations?user=yourid", // 구글 스칼라 링크
         bio: "안녕하세요. 저는 OO 분야를 연구하는 박사과정생입니다. 주로 데이터 분석과 인공지능을 활용한 연구에 관심이 있습니다."
@@ -49,4 +49,5 @@ const config = {
             image: "https://via.placeholder.com/300x200"
         }
     ]
+
 };
