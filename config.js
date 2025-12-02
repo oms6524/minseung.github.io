@@ -10,7 +10,7 @@ const config = {
         
         // 👇 리서치게이트 주소
         researchgate: "https://www.researchgate.net/profile/Min-Seung-Oh",
-        scholar: "https://scholar.google.com/citations?user=yourid", 
+        scholar: "https://scholar.google.com/citations?user=dcZRV0AAAAAJ&hl=ko&oi=ao", 
         bio: "Hello! I’m a PhD student studying soil biogeochemistry, with research interests in enzyme activity in dry soils and soil microbiology."
     },
 
@@ -144,7 +144,7 @@ const config = {
             image: "fig1.jpg"
         },
         {
-            title: "Hallasan National Park with my labmate",
+            title: "Hallasan National Park Sampling",
             description: "한라산에서 토양 샘플링.. 친구들과 함께",
             image: "fig2.jpg" // 같은 폴더에 있는 이미지 파일명
         }
