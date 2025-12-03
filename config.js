@@ -83,6 +83,7 @@ const config = {
 
 // [수상 실적] (NEW)
     awards: [
+        { date: "2024", title: "NH Bank Talent Scholarship", org: "NH bank" },
         { date: "2022", title: "Agricultural Life Industry Startup Idea Contest (Top Award)", org: "GNU Agro Frontier Leader business group" },
         { date: "2021", title: "National Non-face-to-face Business Model Idea Contest (Top Award)", org: "Korea Techno Park" },
         { date: "2020", title: "Start-up Idea Contest (Top Award)", org: "GNU Public Education Innovation Center" },
